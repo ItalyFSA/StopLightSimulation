@@ -2,6 +2,7 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.*;
 
 public class Simulation
 {
@@ -15,6 +16,7 @@ public class Simulation
         curState = "green";
         nextState = "yellow";
         System.out.println("Current State: Green");
+        writeToFile(curState);
     }
 
     public static void yellowState()
@@ -23,6 +25,7 @@ public class Simulation
         curState = "yellow";
         nextState = "red";
         System.out.println("Current State: Yellow");
+        writeToFile(curState);
     }
 
     public static void redState()
@@ -31,6 +34,7 @@ public class Simulation
         curState = "red";
         nextState = "green";
         System.out.println("Current State: Red");
+        writeToFile(curState);
     }
 
     public static void faultState()
@@ -39,6 +43,27 @@ public class Simulation
         curState = "fault";
         nextState = "red";
         System.out.println("Current State: Fault");
+        writeToFile(curState);
+    }
+
+    public static void writeToFile(String curState)
+    {
+        BufferedWriter bw;
+        try{
+            File file = new File("Stoplight.txt");
+            if (!file.exists())
+            {
+                file.createNewFile();
+            }
+                
+            bw = new BufferedWriter (new FileWriter("Stoplight.txt", true));
+            bw.write(curState);
+            bw.newLine();
+            bw.close();
+
+        }catch (IOException e){
+            System.out.println("Exception");
+        }
     }
 
     public static void main(String[] args)
@@ -90,4 +115,3 @@ public class Simulation
     }
 
 }
-
